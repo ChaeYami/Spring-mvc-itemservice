@@ -81,6 +81,15 @@ public class BasicItemController {
         return "basic/item";
     }*/
 
+    /**
+     * @ModelAttribute 의 이름을 생략하면 모델에 저장될 때 클래스명을 사용한다.
+     * 이때 클래스의 첫글자만 소문자로 변경해서 등록한다.
+     * 예) @ModelAttribute 클래스명 모델에 자동 추가되는 이름
+     * Item -> item
+     * HelloWorld -> helloWorld
+     */
+
+
     // 상품 등록 4 - addItemV4 - 상품 등록 처리 - ModelAttribute 전체 생략
     /**
      * @ModelAttribute 자체 생략 가능
@@ -93,7 +102,9 @@ public class BasicItemController {
     }
 
 
-    // 상품 수정
+
+
+    // 상품 수정 폼
     @GetMapping("/{itemId}/edit")
     public String editForm(@PathVariable Long itemId, Model model) {
         Item item = itemRepository.findById(itemId);
@@ -101,6 +112,12 @@ public class BasicItemController {
         return "basic/editForm";
     }
 
+    // 상품 수정 등록
+    @PostMapping("/{itemId}/edit")
+    public String edit(@PathVariable Long itemId, @ModelAttribute Item item) {
+        itemRepository.update(itemId, item);
+        return "redirect:/basic/items/{itemId}";
+    }
 
 
     /**

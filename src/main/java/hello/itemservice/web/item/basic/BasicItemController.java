@@ -36,6 +36,12 @@ public class BasicItemController {
         return "basic/item";
     }
 
+    // 상품 등록 폼으로 이동
+    @GetMapping("/add")
+    public String addForm() {
+        return "basic/addForm";
+    }
+
     /**
      * 테스트용 데이터 추가
      */
